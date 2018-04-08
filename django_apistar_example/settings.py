@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'markdownx',
     'django_apistar',
     'django_apistar.authentication',
     'core',
@@ -93,16 +94,15 @@ APISTAR_ROUTE_CONF = 'core.routes'
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-]
+AUTH_PASSWORD_VALIDATORS = []
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -119,6 +119,6 @@ STATIC_URL = '/static/'
 django_heroku.settings(locals())
 
 APISTAR_SETTINGS = {
-    'ALLOWED_DJANGO_ROUTES': ('/admin/', '/static/'),
+    'ALLOWED_DJANGO_ROUTES': ('/admin/', '/static/', '/markdownx/'),
     'AUTHENTICATION': [DjangoBasicAuthentication(), DjangoTokenAuthentication()]
 }
