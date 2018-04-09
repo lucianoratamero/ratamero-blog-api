@@ -10,9 +10,9 @@ def list_posts():
     return [schemas.BlogPost(db_post.__dict__) for db_post in db_posts]
 
 
-def post(post_id: int):
+def post(slug: str):
     try:
-        db_post = models.BlogPost.objects.get(id=post_id)
+        db_post = models.BlogPost.objects.get(slug=slug)
     except models.BlogPost.DoesNotExist:
-        return http.Response({'message': 'Post {} does not exist.'.format(post_id)}, status=404)
+        return http.Response({'message': 'Post {} does not exist.'.format(slug)}, status=404)
     return schemas.BlogPost(db_post.__dict__)
