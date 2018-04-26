@@ -1,12 +1,19 @@
 
 from apistar import http
+from django.core.paginator import Paginator, EmptyPage
 
 from core import schemas
 from core import models
 
 
-def list_posts():
+def list_posts(page: http.QueryParam):
     db_posts = models.BlogPost.objects.all()
+    if page:
+        paginator = Paginator(db_posts, 5)
+        try:
+            db_posts = paginator.page(int(page))
+        except EmptyPage:
+            db_posts = []
     return [schemas.BlogPost(db_post.__dict__) for db_post in db_posts]
 
 
