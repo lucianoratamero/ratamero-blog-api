@@ -33,6 +33,7 @@ psycopg2==2.7.4
 ptyprocess==0.5.2
 py==1.5.3
 Pygments==2.2.0
+pymdown-extensions==4.10
 pytest==3.5.0
 pytz==2018.3
 requests==2.18.4
