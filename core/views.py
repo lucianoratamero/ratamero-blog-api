@@ -11,7 +11,7 @@ def list_posts(page: http.QueryParam):
     page_count = 1
     if page:
         paginator = Paginator(db_posts, 5)
-        page_count = paginator.count
+        page_count = paginator.num_pages
         try:
             db_posts = paginator.page(int(page))
         except EmptyPage:
