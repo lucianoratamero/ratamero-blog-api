@@ -47,6 +47,11 @@ INSTALLED_APPS = [
     'core',
 ]
 
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.codehilite',
+    'pymdownx.inlinehilite',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
