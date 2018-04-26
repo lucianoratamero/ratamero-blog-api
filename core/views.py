@@ -18,6 +18,7 @@ def list_posts(page: http.QueryParam):
             db_posts = []
     return {
         'page_count': page_count,
+        'current_page': page or 1,
         'posts': [schemas.BlogPost(db_post.__dict__) for db_post in db_posts]
     }
 
