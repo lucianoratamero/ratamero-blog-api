@@ -17,5 +17,8 @@ class BlogPost(models.Model):
         self.slug = slugify(self.title)
         super().save()
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         ordering = ['-pub_date']
