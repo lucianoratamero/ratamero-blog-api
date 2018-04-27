@@ -20,7 +20,7 @@ def list_posts(page: http.QueryParam):
 
     posts = [schemas.BlogPost(db_post.__dict__) for db_post in db_posts]
     for post in posts:
-        post['body'] = markdownify(post['body'])
+        post.pop('key', None)
 
     return {
         'page_count': page_count,
