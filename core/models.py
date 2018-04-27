@@ -14,7 +14,8 @@ class BlogPost(models.Model):
     slug = models.CharField(max_length=255, null=True, blank=True)
 
     def save(self):
-        self.slug = slugify(self.title)
+        if not self.slug:
+            self.slug = slugify(self.title)
         super().save()
 
     def __str__(self):
