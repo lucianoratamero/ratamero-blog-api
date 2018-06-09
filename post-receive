@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# SOURCE_DEST is whatever directory you have configured
+# uwsgi look for your app in.  This is where Git will put
+# the new source files that you push to this repo.
+
+# Variables
+SOURCE_DEST=/root/virtualenvs/ratamero-blog-api
+GIT_DIR=/root/virtualenvs/ratamero-blog-api
+
+# Update the HEAD to latest commit
+git --work-tree=$SOURCE_DEST --git-dir=$GIT_DIR checkout -f
+
+cd $SOURCE_DEST
+. bin/activate
+
+# Run make targets
+make deploy
+make restart
