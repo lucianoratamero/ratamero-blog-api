@@ -24,9 +24,8 @@ class DjangoAPIStarWSGIApplication:
     def __init__(self):
         routes = import_module(settings.APISTAR_ROUTE_CONF).routes
 
-        if settings.DEBUG:
-            routes.append(Include('/static', static_urls))
-            routes.append(Include('/docs', docs_urls))
+        routes.append(Include('/static', static_urls))
+        routes.append(Include('/docs', docs_urls))
 
         self.django_wsgi_app = get_wsgi_application()
         self.apistar_wsgi_app = CORSApp(routes=routes, settings=settings.APISTAR_SETTINGS)
