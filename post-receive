@@ -13,6 +13,7 @@ git --work-tree=$SOURCE_DEST --git-dir=$GIT_DIR checkout -f
 
 cd $SOURCE_DEST
 . bin/activate
+. bin/postactivate
 
 # Run make targets
 make deploy

@@ -3,7 +3,7 @@
 
 NGINX=/etc/init.d/nginx
 
-deploy: dependencies clean minified_static_files restart
+deploy: dependencies clean migrate minified_static_files
 
 restart: $(NGINX)
 	$(NGINX) restart
@@ -17,9 +17,12 @@ dependencies:
 minified_static_files:
 	python manage.py collectstatic # Collect into staticfiles/
 
+migrate:
+	python manage.py migrate
+
 clean:
 	@-rm -rf staticfiles/
-	@-find . -name '__pycache__' -exec /bin/rm -rf {} ;
+	@-find ./ -name "*.pyc" -print0 | xargs -0 rm;
 	@echo 'Successfully Cleaned!'
 
 .PHONY: clean dependencies restart stop deploy
