@@ -16,8 +16,7 @@ dependencies:
 	pip install -r requirements.txt
 
 minified_static_files:
-	python manage.py collectstatic
-	@-mv staticfiles/ /tmp/ratamero-blog-api/
+	python manage.py collectstatic --no-input
 
 migrate:
 	python manage.py migrate

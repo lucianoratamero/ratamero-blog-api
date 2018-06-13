@@ -12,8 +12,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku
-from django_apistar.authentication import DjangoBasicAuthentication, DjangoTokenAuthentication
+# import django_heroku
+import logging.config
+from django_apistar.authentication import (
+    DjangoBasicAuthentication, DjangoTokenAuthentication
+)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +31,29 @@ SECRET_KEY = '^ee#ymp8r3qd0-kutb$*mi4-0jd*v64-*g&&$=bonkdis(p&j0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = []
+LOGGING_CONFIG = None
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/tmp/blog_debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+logging.config.dictConfig(LOGGING)
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,10 +153,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/tmp/ratamero-blog-api/'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 APISTAR_SETTINGS = {
     'ALLOWED_DJANGO_ROUTES': ('/admin/', '/static/', '/markdownx/'),
-    'AUTHENTICATION': [DjangoBasicAuthentication(), DjangoTokenAuthentication()]
+    'AUTHENTICATION': [
+        DjangoBasicAuthentication(), DjangoTokenAuthentication()
+    ]
 }
